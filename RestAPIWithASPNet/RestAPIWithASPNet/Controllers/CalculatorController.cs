@@ -11,7 +11,7 @@ namespace RestAPIWithASPNet.Controllers
     public class CalculatorController : ControllerBase
     {
         // GET api/values
-        [HttpGet("{firstNumber}/{secondNumber}")]
+        [HttpGet("sum/{firstNumber}/{secondNumber}")]
         public ActionResult<IEnumerable<string>> Sum(string firstNumber, string secondNumber)
         {
             if (IsNumeric(firstNumber) && IsNumeric(secondNumber))
@@ -23,7 +23,54 @@ namespace RestAPIWithASPNet.Controllers
             }
 
             return BadRequest("Invalid input");
+        }       
+
+        // GET api/values
+        [HttpGet("subtraction/{firstNumber}/{secondNumber}")]
+        public ActionResult<IEnumerable<string>> Subtraction(string firstNumber, string secondNumber)
+        {
+            if (IsNumeric(firstNumber) && IsNumeric(secondNumber))
+            {
+                var sum = ConvertToDecimal(firstNumber)
+                    - Convert.ToDecimal(secondNumber);
+
+                return Ok(sum.ToString());
+            }
+
+            return BadRequest("Invalid input");
         }
+
+
+        // GET api/values
+        [HttpGet("division/{firstNumber}/{secondNumber}")]
+        public ActionResult<IEnumerable<string>> Division(string firstNumber, string secondNumber)
+        {
+            if (IsNumeric(firstNumber) && IsNumeric(secondNumber))
+            {
+                var sum = ConvertToDecimal(firstNumber)
+                    / Convert.ToDecimal(secondNumber);
+
+                return Ok(sum.ToString());
+            }
+
+            return BadRequest("Invalid input");
+        }
+
+        // GET api/values
+        [HttpGet("multiplication/{firstNumber}/{secondNumber}")]
+        public ActionResult<IEnumerable<string>> Multiplication(string firstNumber, string secondNumber)
+        {
+            if (IsNumeric(firstNumber) && IsNumeric(secondNumber))
+            {
+                var sum = ConvertToDecimal(firstNumber)
+                    * Convert.ToDecimal(secondNumber);
+
+                return Ok(sum.ToString());
+            }
+
+            return BadRequest("Invalid input");
+        }
+
 
         private decimal ConvertToDecimal(string number)
         {
@@ -43,5 +90,7 @@ namespace RestAPIWithASPNet.Controllers
 
             return isNumber;
         }
+
+
     }
 }
